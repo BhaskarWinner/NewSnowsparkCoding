@@ -14,21 +14,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           repository: BhaskarWinner/NewSnowsparkCoding
-          #path: dev
           ref: dev
-          
+
       - name: Setup Python 3.9
         uses: actions/setup-python@v4
         with:
           python-version: '3.9'
 
       - name: Install Python packages
-        run: pip install -r requirements.txt
+        run: |
+          pip install -r requirements.txt || exit 1
+
+      - name: Debug Environment Variables
+        run: env
 
       - name: Deploy Snowpark apps
         working-directory: NEW_SNOWPARK_PROJECT
@@ -39,9 +41,11 @@ jobs:
           SNOWFLAKE_ROLE: ${{ secrets.SNOWFLAKE_ROLE_DEV }}
           SNOWFLAKE_WAREHOUSE: ${{ secrets.SNOWFLAKE_WAREHOUSE_DEV }}
           SNOWFLAKE_DATABASE: ${{ secrets.SNOWFLAKE_DATABASE_DEV }}
-        run: python deploy_snowpark_app.py $GITHUB_WORKSPACE/NEW_SNOWPARK_PROJECT
-      
+        run: |
+          python deploy_snowpark_app.py $GITHUB_WORKSPACE/NEW_SNOWPARK_PROJECT || exit 1
+
       - name: Deploy Snowpark tasks
+        working-directory: NEW_SNOWPARK_PROJECT/app
         env:
           SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT_DEV }}
           SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER_DEV }}
@@ -50,5 +54,5 @@ jobs:
           SNOWFLAKE_WAREHOUSE: ${{ secrets.SNOWFLAKE_WAREHOUSE_DEV }}
           SNOWFLAKE_DATABASE: ${{ secrets.SNOWFLAKE_DATABASE_DEV }}
           SNOWFLAKE_SCHEMA: ${{ secrets.SNOWFLAKE_SCHEMA_DEV }}
-        working-directory: NEW_SNOWPARK_PROJECT/app
-        run: python create_task.py
+        run: |
+          python create_task.py || exit 1
