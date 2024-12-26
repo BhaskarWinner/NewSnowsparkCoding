@@ -80,6 +80,6 @@ with DAG("my_dag_task_branch",schedule=timedelta(days=1)) as dag:
   
     dag_task_branch >> [dag_task_3,dag_task_4]
   
-    schema = root.databases[database].schemas[schema]
+    schema = root.databases["KOIOS_QA"].schemas["public"]
     dag_op = DAGOperation(schema)
     dag_op.deploy(dag,CreateMode.or_replace)
