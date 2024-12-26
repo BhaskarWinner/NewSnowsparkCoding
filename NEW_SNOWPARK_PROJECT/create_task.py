@@ -27,15 +27,15 @@ conn = snowflake.connector.connect(
 #print("connection established")
 #print(conn)
 
-root = Root(conn)
-print(root)
+#root = Root(conn)
+#print(root)
 # crete definiton for the task 
 
 my_task = Task("my_task",StoredProcedureCall(procedures.hello_procedure,\
     stage_location="@dev_deployment"),warehouse="compute_wh",schedule=timedelta(hours=1))
 
 tasks = root.databases["KOIOS_DEV"].schemas['KOIOS_RAW'].tasks
-#tasks.create(my_task)
+tasks.create(my_task)
 
 # create dag  
 with DAG("my_dag",schedule=timedelta(days=1)) as dag:
@@ -52,7 +52,7 @@ with DAG("my_dag",schedule=timedelta(days=1)) as dag:
     stage_location="@dev_deployment"),warehouse="compute_wh")
   
     dag_task_1 >> dag_task_2 >> [dag_task_3,dag_task_4]
-    schema = root.databases["KOIOS_DEV"].schemas["KOIOS_RAW"]
+    schema = root.databases["KOIOS_DEV"].schemas["public"]
     dag_op = DAGOperation(schema)
     dag_op.deploy(dag,CreateMode.or_replace)
 
@@ -80,6 +80,6 @@ with DAG("my_dag_task_branch",schedule=timedelta(days=1)) as dag:
   
     dag_task_branch >> [dag_task_3,dag_task_4]
   
-    schema = root.databases["KOIOS_DEV"].schemas["KOIOS_RAW"]
+    schema = root.databases["KOIOS_DEV"].schemas["public"]
     dag_op = DAGOperation(schema)
     dag_op.deploy(dag,CreateMode.or_replace)
