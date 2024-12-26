@@ -1,0 +1,1 @@
+create table KOIOS_QA.public.test_table(a varchar);

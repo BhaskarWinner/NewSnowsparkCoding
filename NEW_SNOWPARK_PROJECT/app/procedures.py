@@ -2,8 +2,8 @@ from __future__ import annotations
 
 import sys
 
-#from common import print_hello
-from NEW_SNOWPARK_PROJECT.app.common import print_hello
+from common import print_hello
+#from NEW_SNOWPARK_PROJECT.app.common import print_hello
 from snowflake.snowpark import Session
 
 
@@ -16,6 +16,9 @@ def test_procedure(session: Session) -> str:
 
 def test_procedure_two(session: Session) -> str:
     return "Test procedure" 
+
+def execute_sql_statements(session: Session) -> None:
+    session.sql("EXECUTE IMMEDIATE FROM @dev_deployment/my_snowpark_project/test.sql").collect()
 
 
 # For local debugging
