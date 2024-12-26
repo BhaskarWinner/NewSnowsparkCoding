@@ -34,7 +34,7 @@ conn = snowflake.connector.connect(
 my_task = Task("my_task",StoredProcedureCall(procedures.hello_procedure,\
     stage_location="@dev_deployment"),warehouse="compute_wh",schedule=timedelta(hours=1))
 
-tasks = root.databases["KOIOS_DEV"].schemas['KOIOS_RAW'].tasks
+tasks = root.databases["KOIOS_DEV"].schemas['public'].tasks
 tasks.create(my_task)
 
 # create dag  
