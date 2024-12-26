@@ -31,11 +31,11 @@ conn = snowflake.connector.connect(
 #print(root)
 # crete definiton for the task 
 
-my_task = Task("my_task",StoredProcedureCall(procedures.hello_procedure,\
-    stage_location="@dev_deployment"),warehouse="compute_wh",schedule=timedelta(hours=1))
+#my_task = Task("my_task",StoredProcedureCall(procedures.hello_procedure,\
+#    stage_location="@dev_deployment"),warehouse="compute_wh",schedule=timedelta(hours=1))
 
-tasks = root.databases["KOIOS_DEV"].schemas['public'].tasks
-tasks.create(my_task)
+#tasks = root.databases["KOIOS_DEV"].schemas['public'].tasks
+#tasks.create(my_task)
 
 # create dag  
 with DAG("my_dag",schedule=timedelta(days=1)) as dag:
