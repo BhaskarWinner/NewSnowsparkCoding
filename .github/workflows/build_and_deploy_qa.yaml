@@ -42,7 +42,6 @@ jobs:
         run: python deploy_snowpark_app.py $GITHUB_WORKSPACE/NEW_SNOWPARK_PROJECT
 
       - name: Deploy Snowpark tasks
-        working-directory: NEW_SNOWPARK_PROJECT
         env:
           SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT_QA}}
           SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER_QA }}
@@ -50,4 +49,5 @@ jobs:
           SNOWFLAKE_ROLE: ${{ secrets.SNOWFLAKE_ROLE_QA }}
           SNOWFLAKE_WAREHOUSE: ${{ secrets.SNOWFLAKE_WAREHOUSE_QA }}
           SNOWFLAKE_DATABASE: ${{ secrets.SNOWFLAKE_DATABASE_QA }}
-        run: python create_task.py/NEW_SNOWPARK_PROJECT
+        working-directory: NEW_SNOWPARK_PROJECT/app
+        run: python create_task.py
