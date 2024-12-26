@@ -27,7 +27,7 @@ conn = snowflake.connector.connect(
 #print("connection established")
 #print(conn)
 
-#root = Root(conn)
+root = Root(conn)
 #print(root)
 # crete definiton for the task 
 
