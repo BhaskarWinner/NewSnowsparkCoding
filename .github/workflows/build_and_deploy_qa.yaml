@@ -49,5 +49,5 @@ jobs:
           SNOWFLAKE_ROLE: ${{ secrets.SNOWFLAKE_ROLE_QA }}
           SNOWFLAKE_WAREHOUSE: ${{ secrets.SNOWFLAKE_WAREHOUSE_QA }}
           SNOWFLAKE_DATABASE: ${{ secrets.SNOWFLAKE_DATABASE_QA }}
-        working-directory: NEW_SNOWPARK_PROJECT/app
+        working-directory: NEW_SNOWPARK_PROJECT
         run: python create_task.py
