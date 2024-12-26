@@ -2,7 +2,8 @@ from __future__ import annotations
 
 import sys
 
-from common import print_hello
+#from common import print_hello
+from NEW_SNOWPARK_PROJECT.app.common import print_hello
 from snowflake.snowpark import Session
 
 
@@ -12,6 +13,9 @@ def hello_procedure(session: Session, name: str) -> str:
 
 def test_procedure(session: Session) -> str:
     return "Test procedure"
+
+def test_procedure_two(session: Session) -> str:
+    return "Test procedure" 
 
 
 # For local debugging
