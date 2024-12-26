@@ -11,20 +11,20 @@ import os
 from snowflake.core.task.dagv1 import DAG , DAGTask , DAGOperation , CreateMode , DAGTaskBranch
 
 
-conn = snowflake.connector.connect()
+#conn = snowflake.connector.connect()
 
 print("****** snowflake account ******")
 #print("snow account here"+os.environ.get("SNOWFLAKE_ACCOUNT"))
 
 
-# conn = snowflake.connector.connect(
-#     user=os.environ.get('SNOWFLAKE_USER'),
-#     password=os.environ.get('SNOWFLAKE_PASSWORD'),
-#     account=os.environ.get("SNOWFLAKE_ACCOUNT"),
-#     warehouse=os.environ.get('SNOWFLAKE_WAREHOUSE'),
-#     database=os.environ.get('SNOWFLAKE_DATABASE'),
-#     schema=os.environ.get('SNOWFLAKE_SCHEMA'),
-#     role=os.environ.get('SNOWFLAKE_ROLE'))
+ conn = snowflake.connector.connect(
+     user=os.environ.get('SNOWFLAKE_USER'),
+     password=os.environ.get('SNOWFLAKE_PASSWORD'),
+     account=os.environ.get("SNOWFLAKE_ACCOUNT"),
+     warehouse=os.environ.get('SNOWFLAKE_WAREHOUSE'),
+     database=os.environ.get('SNOWFLAKE_DATABASE'),
+     schema=os.environ.get('SNOWFLAKE_SCHEMA'),
+     role=os.environ.get('SNOWFLAKE_ROLE'))
 
 print("connection established")
 print(conn)
