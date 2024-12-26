@@ -52,7 +52,7 @@ with DAG("my_dag",schedule=timedelta(days=1)) as dag:
     stage_location="@dev_deployment"),warehouse="compute_wh")
   
     dag_task_1 >> dag_task_2 >> [dag_task_3,dag_task_4]
-    schema = root.databases["KOIOS_DEV"].schemas["public"]
+    schema = root.databases["KOIOS_QA"].schemas["public"]
     dag_op = DAGOperation(schema)
     dag_op.deploy(dag,CreateMode.or_replace)
 
@@ -80,6 +80,6 @@ with DAG("my_dag_task_branch",schedule=timedelta(days=1)) as dag:
   
     dag_task_branch >> [dag_task_3,dag_task_4]
   
-    schema = root.databases["KOIOS_DEV"].schemas["public"]
+    schema = root.databases["KOIOS_QA"].schemas["public"]
     dag_op = DAGOperation(schema)
     dag_op.deploy(dag,CreateMode.or_replace)
